@@ -1,0 +1,12 @@
+.it {
+    font-style:italic;
+}
+
+.page-head {
+    font-size: 17px;
+}
+
+.sec-head {
+    font-weight: bold;
+    font-size: 15px;
+}

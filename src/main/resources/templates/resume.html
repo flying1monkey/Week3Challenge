@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Welcome to the Resume Generator!</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            padding-top: 70px;
+            /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+        }
+    </style>
+    <link href="css/custom.css" rel="stylesheet"/>
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Home</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="addeducation.html">Add education</a>
+                </li>
+                <li>
+                    <a href="addskill.html">Add a skill</a>
+                </li>
+                <li>
+                    <a href="addwork.html">Add a job</a>
+                </li>
+                <li>
+                    <a href="resume.html">Show your resume</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="h3">
+                <p th:text="${person.name}"/>
+                <p th:text="${person.email}"/>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+    <hr/>
+    <div class="row">
+        <div class="col-lg-12 text-left">
+            <div class="sec-head">
+                <p>Education</p>
+            </div>
+            <div th:each="ed: ${person.getEducation()}">
+                <p><span class="it" th:text="${ed.school}"/></p>
+                <p><span th:text="${ed.degree}"/>, <span th:text="${ed.gradYear}"/></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 text-left">
+            <div class="sec-head">
+                <p>Experience</p>
+            </div>
+            <p th:each="work: ${person.getWork()}">
+            <p th:text="${work.jobTitle}"/>
+            <p><span th:text="${work.company}"/>, <span th:text="${work.startDate}"/>-<span th:text="${work.endDate}"/>
+            </p>
+            <p>-Duty 1: <span th:text="${work.firstDuty}"/></p>
+            <p>-Duty 2: <span th:text="${work.secondDuty}"/></p>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 text-left">
+            <div class="sec-head">
+                <p>Skills</p>
+            </div>
+            <div class="strong" th:each="jobSkill: ${person.getSkills()}">
+                <p><span th:text="${jobSkill.skill}"/>, <span th:text="${jobSkill.skillLevel}"/></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container -->
+
+<!--Footer-->
+<footer>
+    <hr/>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <p>WeekThreeChallenge - Jesse Berliner</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- /.footer -->
+
+<!-- jQuery Version 1.11.1 -->
+<script src="js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
