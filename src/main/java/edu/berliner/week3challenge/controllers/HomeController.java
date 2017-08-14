@@ -124,8 +124,11 @@ public class HomeController
     @GetMapping("/resume")
     public String resume(Model model)
     {
-        //get user - only a single user
-        User person = userRepo.findOne((long) 0);
+        //get user - currently only a single user
+        
+        Iterable <User> user = userRepo.findAll();
+        //Get the actual person
+        User person = user.iterator().next();
 
         //get iterables of that single user's jobs(Work), skills(Skills), and education(Education)
         //and add to the user's ArrayList
