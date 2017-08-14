@@ -1,5 +1,14 @@
 package edu.berliner.week3challenge.controllers;
 
+
+/*
+ *This project takes a user's input (name, email, jobs, education, and skills) and outputs a resume.
+ *
+ * @author
+ * Jesse Berliner
+ * August 2017
+ */
+
 import edu.berliner.week3challenge.models.Education;
 import edu.berliner.week3challenge.models.Skills;
 import edu.berliner.week3challenge.models.User;
@@ -22,7 +31,7 @@ import java.util.ArrayList;
 @Controller
 public class HomeController
 {
-
+//repositories
     @Autowired
     EdRepo edRepo;
     @Autowired
@@ -33,7 +42,7 @@ public class HomeController
     WorkRepo workRepo;
 
 
-
+//home page
     @GetMapping("/")
     public String start(Model model)
     {
@@ -46,9 +55,11 @@ public class HomeController
         return "index";
     }
 
+    //Add user pages
     @GetMapping("/adduser")
     public String addUser(Model model)
     {
+
         model.addAttribute("person", new User());
         return "adduser";
     }
@@ -56,22 +67,22 @@ public class HomeController
     @PostMapping("/adduser")
     public String submitUser(@Valid @ModelAttribute("person")User user, BindingResult bindingResult)
     {
-        System.out.println("post");
         if(bindingResult.hasErrors())
         {
-            System.out.println("has error");
             return "adduser";
         }
         userRepo.save(user);
         return "added";
     }
 
+    //Add skill pages
     @GetMapping("/addskill")
     public String addSkill(Model model)
     {
         model.addAttribute("newSkill", new Skills());
         return "addskill";
     }
+
     @PostMapping("addskill")
     public String submitSkill(@ModelAttribute("newSkill")Skills newSkill)
     {
@@ -79,6 +90,7 @@ public class HomeController
         return "added";
     }
 
+    //add education pages
     @GetMapping("/addeducation")
     public String addEducation(Model model)
     {
@@ -93,6 +105,7 @@ public class HomeController
         return "added";
     }
 
+    //add work pages
     @GetMapping("/addwork")
     public String addWork(Model model)
     {
@@ -107,13 +120,12 @@ public class HomeController
         return "added";
     }
 
+    //resume generation
     @GetMapping("/resume")
     public String resume(Model model)
     {
-        //get user - currently only a single user
-        Iterable <User> user = userRepo.findAll();
-        //Get the actual person
-        User person = user.iterator().next();
+        //get user - only a single user
+        User person = userRepo.findOne((long) 0);
 
         //get iterables of that single user's jobs(Work), skills(Skills), and education(Education)
         //and add to the user's ArrayList

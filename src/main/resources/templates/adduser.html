@@ -73,6 +73,7 @@
 
     <div class="row">
         <div class="col-lg-12 text-center">
+            <p>Only do this once! The first entry will be the only one used.</p>
             <form action="#" th:action="@{/adduser}" th:object="${person}" method="post">
                 <p>Your name: <input type="text" th:field="*{name}"/>
                     <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Problem with name</span></p>
